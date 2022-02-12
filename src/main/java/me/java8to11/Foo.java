@@ -1,7 +1,10 @@
 package me.java8to11;
 
+import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.IntConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
@@ -34,5 +37,36 @@ public class Foo {
         // unaryOperator: 입출력 타입이 같은 경우
         UnaryOperator<Integer> multiply2_2 = (i) -> i * 2;
 
+        // lambda expression
+        Supplier<Integer> get100 = () -> 100;
+        BinaryOperator<Integer> sum = (Integer a, Integer b) -> a + b; // type 생략 가능
+
+        Foo foo = new Foo();
+        foo.run();
+    }
+
+    private void run() {
+        final int baseNumber = 10; // 변수 capture
+
+        // 클래스들과 람다와 다른 점: 클래스들은 shadowing 가능 (별도의 scope이라 가능)
+        // 람다는 같은 scope 사용
+
+        // 로컬 클래스
+        class LocalClass {
+            void printBaseNumber() {
+                System.out.println(baseNumber);
+            }
+        }
+
+        // 익명 클래스
+        Consumer<Integer> integerConsumer = new Consumer<Integer>() {
+            public void accept(Integer integer) {
+                System.out.println(baseNumber);
+            }
+        };
+
+        // 람다
+        IntConsumer printInt = (i) -> System.out.println(i + baseNumber);
+        printInt.accept(10);
     }
 }
