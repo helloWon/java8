@@ -1,4 +1,4 @@
-package me.java8to11;
+package me.java8to11.completableFuture;
 
 public class ConcurrentApp {
     /**
